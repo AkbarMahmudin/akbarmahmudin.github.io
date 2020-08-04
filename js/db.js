@@ -25,7 +25,6 @@ function deleteTeam(team) {
             let store = tx.objectStore('teams');
             
             store.delete(parseInt(team.id));
-            goBack();
             return tx.complete;
         });
 }

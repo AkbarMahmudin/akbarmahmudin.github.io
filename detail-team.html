@@ -89,6 +89,7 @@
                     if (confirmDelete) {
                         deleteTeam(team);
                         M.toast({html: `${team.name} berhasil dihapus dari daftar favoritmu.`});
+                        goBack();
                     } else {
                         M.toast({html: `${team.name} tidak jadi dihapus dari daftar favoritmu.`})
                     }
