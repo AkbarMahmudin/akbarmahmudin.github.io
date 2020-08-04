@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Warta Bola">
+    <meta name="theme-color" content="#00b8d4">
+    <meta name="background-color" content="#00b8d4">
+    <title>Info Team</title>
+    <!-- Materialize -->
+    <link rel="stylesheet" href="/css/materialize.min.css">
+    <!-- Style -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="/images/logo.png" type="image/png">
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <nav class="cyan accent-4" role="navigation">
+        <div class="nav-wrapper container">
+          <a href="#" class="brand-logo" id="logo-container">Info Team</a>
+          <a class="sidenav-trigger" data-target="nav-mobile" onclick="goBack()">
+            <i class="material-icons">arrow_back</i>
+          </a>
+        </div>
+    </nav>
+    <!-- Akhir Navigasi -->
+
+    <main class="container" id="body-content">
+        <div class="row detail-team">
+            <div class="col m5 s12" id="detail-info"></div>
+            <div class="col m7 s12">
+                <ul class="collection with-header">
+                    <li class="collection-header"><h4>Pemain</h4></li>
+                    <div id="squad-info"></div>
+                </ul>
+            </div>
+        </div>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red" id="favorite">
+            <i class="large material-icons">star</i>
+            </a>
+        </div>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red" id="delete">
+            <i class="large material-icons">delete</i>
+            </a>
+        </div>
+    </main>
+    
+
+    <!-- Scripts -->
+    <script src="/js/materialize.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/idb.js"></script>
+    <script src="/js/db.js"></script>
+    <script src="/js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let urlParams = new URLSearchParams(window.location.search);
+            let isFavorite = urlParams.get('favorited');
+            let btnFavorite = document.querySelector('#favorite');
+            let btnDelete = document.querySelector('#delete');
+            let item = getTeamById();
+
+            if (isFavorite == 'true') {
+                btnFavorite.style.display = 'none';
+                getFavoriteTeamById();
+            } else {
+                btnDelete.style.display = 'none';
+            }
+
+            btnFavorite.onclick = function () {
+                item.then(function (team) {
+                    favoriteTeam(team);
+                    isFavorite = true;
+                });
+            };
+
+            btnDelete.onclick = function () {
+                item.then(function (team) {
+                    let confirmDelete = confirm(`${team.name} akan dihapus dari daftar favoritmu !`);
+
+                    if (confirmDelete) {
+                        deleteTeam(team);
+                        M.toast({html: `${team.name} berhasil dihapus dari daftar favoritmu.`});
+                    } else {
+                        M.toast({html: `${team.name} tidak jadi dihapus dari daftar favoritmu.`})
+                    }
+                });
+            };
+
+        });
+    </script>
+</body>
+</html>

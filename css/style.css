@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #263238;
+}
+
+#filter-bar {
+    margin: 50px 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background: white;
+    padding: 16px;
+}
+
+#filter-bar button {
+    width: 100%;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.detail-team {
+    margin-top: 20px;
+}
+
+.num-player {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    left: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #00b8d4;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+.logo {
+    width: 96px;
+    margin-top: 3px;
+}
+
+.card .card-action {
+    padding: 10px 24px;
+}
+
+.card-image{
+    padding: 24px;
+}
